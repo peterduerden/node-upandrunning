@@ -1,12 +1,16 @@
-var net = require('net');
+var net = require('net'),
+  chatServer = net.createServer();
 
-var chatServer = net.createServer();
+console.log('Starting TCP Chat Server...');
 
 chatServer.on('connection', function(client) {
   client.write('Hi!\n');
-  client.write('Bye!\n');
   
-  client.end();
-})
+  client.on('data', function(data) {
+    console.log(data);
+  });
+});
 
 chatServer.listen(9000);
+
+console.log('TCP Chat Server listing on 127.0.0.1:9000...');
