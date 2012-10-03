@@ -14,11 +14,14 @@ var req = http.request(opts, function(res){
   
   var data = '';
   res.on('data', function(d) {
+    console.log(d);
     data += d;
   });
   
   res.on('end', function() {
-    var json = {status:"ok", message:"Tweet received"};
+    var json = "{\n" +
+      "  \"status\": \"ok\",\n" +
+      "  \"message\": \"Tweet received\"\n}";
     assert.strictEqual(data, json);
   });
 });
