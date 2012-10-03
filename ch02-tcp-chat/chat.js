@@ -3,26 +3,33 @@ var net = require('net');
 var chatServer = net.createServer(),
   clientList = [];
 
-console.log('Starting TCP Chat Server...');
+console.log('Starting TCP Chat Server.');
 
 chatServer.on('connection', function(client) {
   client.name = client.remoteAddress + ':' + client.remotePort;
+  
+  console.log(client.name + ' has joined the chat.');
   client.write('Hi! ' + client.name + '\n');
   
   clientList.push(client);
   
   client.on('data', function(data) {
+    console.log(client.name + ' has sent a message.');
     broadcast(data, client);
   });
   
   client.on('end', function() {
-    console.log('');
+    console.log(client.name + ' has left the chat.');
     clientList.splice(clientList.indexOf(client), 1);
+  });
+  
+  client.on('error', function(e) {
+    console.log(e);
   });
 });
 
 function broadcast(message, client) {
-  var cleanp = [];
+  var cleanup = [];
   
   for(var i=0; i<clientList.length; i+=1) {
     if(client != clientList[i]) {
