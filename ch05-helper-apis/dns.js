@@ -10,7 +10,7 @@ dns.resolve('yahoo.com', 'A', function(error, records) {
 });
 
 //Example 5-2. Using resolve() versus resolveMx()
-dns.resolve('example.com', 'MX', function(error, records) {
+dns.resolve('microsoft.com', 'MX', function(error, records) {
 	if (error) {
 		console.log(error);
 	} else {
@@ -18,7 +18,7 @@ dns.resolve('example.com', 'MX', function(error, records) {
 	}
 });
 
-dns.resolveMx('example.com', function(error, records) {
+dns.resolveMx('dowjones.com', function(error, records) {
 	if (error) {
 		console.log(error);
 	} else {
