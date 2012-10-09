@@ -17,7 +17,17 @@ console.log('Express listening on http://127.0.0.1:8000/');
 
 app.get('/', function(req, res) {
   console.log('GET /');
-  res.send('Welcome to Node Twitter');
+  var title = 'Chirpie',
+    header = 'Welcome to Chirpie';
+  
+  res.render('index', {
+    locals : {
+      'title': title,
+      'header': header,
+      'tweets': tweets,
+      stylesheets: ['/public/style.css']
+    }
+  });
 });
 
 app.post('/send', express.bodyParser(), function(req, res) {
