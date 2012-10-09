@@ -5,4 +5,5 @@ var queryString = 'a=1&b=2&c=d';
 console.log(qs.parse(queryString));
 
 var myObj = {'a':1, 'b':5, 'c':'cats', 'func': function(){console.log('dogs')}};
+// Only strings, Booleans and numbers are serialized.
 console.log(qs.encode(myObj));
