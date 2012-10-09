@@ -30,3 +30,15 @@ console.log(b);
 console.log('Write single UTF-8 2-byte character "é" (FAIL)');
 b.write('é');
 console.log(b);
+
+//Example 4-26. Writing a string into a Buffer including a terminator
+var buffer = new Buffer(5);
+buffer.write('fffff');
+console.log(buffer); //<Buffer 66 66 66 66 66>
+buffer.write('ab');
+console.log(buffer); //<Buffer 66 61 62 66 66>
+
+/** But book says output will be <Buffer 66 61 62 00 66>
+ *  As far as I can tell this was a problem prior to node 0.6.
+ *  See https://github.com/joyent/node/pull/1902 for details.
+ */
