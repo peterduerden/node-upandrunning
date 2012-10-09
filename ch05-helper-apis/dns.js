@@ -28,6 +28,10 @@ dns.resolveMx('example.com', function(error, records) {
 
 //Example 5-3. Looking up a single A record with lookup()
 //DNS.lookup(domain, IP [4|6], callback)
-dns.lookup('google.com', 4, function(e, a) {
-  console.log(a);
+dns.lookup('google.com', 4, function(error, address) {
+	if (error) {
+		console.log(error);
+	} else {
+		console.log(address);
+	}
 });
