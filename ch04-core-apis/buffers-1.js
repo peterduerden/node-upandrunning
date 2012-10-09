@@ -18,3 +18,15 @@ console.log(new Buffer('foobarbaz', 'utf8'));
 console.log(new Buffer('é'));
 console.log(new Buffer('é', 'utf8'));
 console.log(new Buffer('é', 'ascii'));
+
+//Example 4-25. Buffer.write( ) and partial characters
+console.log('\nBuffer.write() and partial characters');
+var b = new Buffer(1);
+console.log('Create buffer of 1 byte');
+console.log(b);
+b.write('a');
+console.log('Write single ASCII character "a" (OK)');
+console.log(b);
+console.log('Write single UTF-8 2-byte character "é" (FAIL)');
+b.write('é');
+console.log(b);
