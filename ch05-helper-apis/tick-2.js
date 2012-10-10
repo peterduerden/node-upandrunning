@@ -18,3 +18,10 @@ process.nextTick(function() {
 });
 
 console.log('End of 1st loop');
+
+// Results:
+// C:\node\node-upandrunning\ch05-helper-apis>node tick-2.js
+// End of 1st loop
+// nextTick 1
+// [ReferenceError: iAmAMistake is not defined]
+// nextTick 3
