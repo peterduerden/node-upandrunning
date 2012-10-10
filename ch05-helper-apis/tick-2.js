@@ -5,10 +5,16 @@ process.on('uncaughtException', function(e) {
 });
 
 process.nextTick(function() {
- console.log('tick');
+ console.log('nextTick 1');
 });
 
 process.nextTick(function() {
  iAmAMistake();
- console.log('tock');
+ console.log('nextTick 2');
 });
+
+process.nextTick(function() {
+  console.log('nextTick 3');
+});
+
+console.log('End of 1st loop');
