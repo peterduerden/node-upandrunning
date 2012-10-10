@@ -2,5 +2,11 @@
 
 var assert = require('assert');
 
-console.log(assert.equal(1, true, 'Truthy'));
-console.log(assert.notEqual(1, true, 'Truthy'));
+assert.equal(1, true, '1 is equal to true'); // ==
+assert.notEqual(1, false, '1 is not equal to false'); // !=
+
+var isTrue = true;
+var isFalse = false;
+assert.strictEqual(isTrue, true, 'isTrue is identical to true'); // ===
+assert.notStrictEqual(isFalse, true, 'isFalse is not identical to true'); // !===
+
