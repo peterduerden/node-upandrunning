@@ -20,11 +20,11 @@ assert.notEqual(1, false, '1 is not equal to false'); // !=
 var TRUE = true;
 var FALSE = false;
 
-assert.strictEqual(isTrue, true, 'TRUE is identical to true'); // ===
-assert.notStrictEqual(isFalse, true, 'FALSE is not identical to true'); // !===
+assert.strictEqual(TRUE, true, 'TRUE is identical to true'); // ===
+assert.notStrictEqual(FALSE, true, 'FALSE is not identical to true'); // !===
 
 var someString = 'A non-empty string';
-var emptyString = '';
+var object = {};
 
 assert.ok(someString, 'Strings that are not empty are truthy'); // ==
-assert.ok(0, 'Zero is not truthy')
+assert.ok(object, 'An object is truthy');
