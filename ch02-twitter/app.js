@@ -1,14 +1,15 @@
 var express = require('express');
 
 console.log('Creating express server...');
-//Warning: express.createServer() is deprecated, express
-//applications no longer inherit from http.Server,
-//please use:
-//
-//  var express = require("express");
-var app = express();
-//var app = express.createServer();
+var app = express.createServer();
 console.log('Express server created.');
+
+// all environments
+app.configure(function() {
+  app.set('view engine', 'ejs');
+  app.use(express.favicon(__dirname + '/favicon.ico'));
+  app.use(express.static(__dirname + '/public'));
+});
 
 var tweets = [];
 
@@ -25,15 +26,22 @@ app.get('/', function(req, res) {
       'title': title,
       'header': header,
       'tweets': tweets,
-      stylesheets: ['/public/style.css']
+      stylesheets: ['/style.css']
     }
   });
 });
 
 app.post('/send', express.bodyParser(), function(req, res) {
   if (req.body && req.body.tweet) {
+    
     tweets.push(req.body.tweet);
-    res.send({status:"ok", message:"Tweet received"});
+    
+    if (acceptsHtml(req.headers['accept'])) {
+      res.redirect('/', 302);
+    } else {
+      res.send( {status:"ok", message:"Tweet received"} );
+    }
+
   } else {
     //no tweet?
     res.send({status:"nok", message:"No tweet received"});
@@ -43,3 +51,13 @@ app.post('/send', express.bodyParser(), function(req, res) {
 app.get('/tweets', function(req, res) {
   res.send(tweets);
 });
+
+function acceptsHtml(header) {  
+  var accepts = header.split(',');
+  for (i=0; i<accepts.length; i+=0) {
+    if (accepts[i] === 'text/html') {
+      return true;
+    }
+  }
+  return false;
+}
